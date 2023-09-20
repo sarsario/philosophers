@@ -28,7 +28,9 @@ OBJDIR	= obj/
 # List of source files (add your *.c files here)
 
 SRCS =\
-	main.c\
+	$(SRCDIR)philo.c\
+	$(SRCDIR)helpers.c\
+	$(SRCDIR)initializers.c\
 
 HEADERS =\
 	$(INCDIR)philosophers.h
@@ -80,10 +82,14 @@ fclean : clean
 # Special rule to force to remake everything
 re : fclean all
 
+# Rule to check norm
+norm :
+	@norminette $(SRCDIR) $(INCDIR)
+
 # This runs the program
 run : $(NAME)
 	@printf "$(CY)>>> Running $(NAME)$(RC)\n"
-	./$(NAME) $(MAP)
+	./$(NAME)
 
 # This specifies the rules that does not correspond to any filename
 .PHONY: all run clean fclean re

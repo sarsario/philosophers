@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:45:49 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/19 19:12:38 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/20 18:01:14 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 # include <stdio.h>
 # include <sys/time.h>
 
-typedef	enum e_state {
-	THINKING,
-	EATING,
+typedef enum e_state {
 	SLEEPING,
+	EATING,
+	THINKING,
 	DEAD
 }	t_state;
 
@@ -52,6 +52,10 @@ typedef struct s_philo {
 	int			nb_eat;
 }				t_philo;
 
-int	valid_args(int argc, char **argv);
+int		valid_args(int argc, char **argv);
+void	init_data(t_data *data, int argc, char **argv);
+t_philo	*init_philo(t_data *data);
+int		failed_malloc(t_data *data, t_philo *philo, t_fork *forks);
+int		destroy_mutex(t_data *data, t_fork *forks);
 
 #endif

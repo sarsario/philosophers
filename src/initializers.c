@@ -6,14 +6,60 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:53:31 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/20 17:03:31 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/23 14:42:14 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
-void	init_data(t_data *data, int argc, char **argv)
+int	alloc_error(t_data *data, t_philo *philo)
 {
+	if (data)
+	{
+		if (data->forks)
+			free(data->forks);
+		pthread_mutex_destroy(&data->mutex);
+		free(data);
+	}
+	if (philo)
+		free(philo);
+	return (ft_perror("Error: allocation failed\n"));
+}
+
+static t_fork	*alloc_forks(int nbr)
+{
+	t_fork	*forks;
+	int		i;
+
+	forks = malloc(sizeof(t_fork) * nbr);
+	if (!forks)
+		return (NULL);
+	i = 0;
+	while (i < nbr)
+	{
+		forks[i].id = i + 1;
+		if (pthread_mutex_init(&forks[i].mutex, NULL))
+		{
+			while (i >= 0)
+			{
+				pthread_mutex_destroy(&forks[i].mutex);
+				i--;
+			}
+			free(forks);
+			return (NULL);
+		}
+		i++;
+	}
+	return (forks);
+}
+
+t_data	*alloc_data(int argc, char **argv)
+{
+	t_data	*data;
+
+	data = malloc(sizeof(t_data));
+	if (!data)
+		return (NULL);
 	data->nbr = ft_atoi(argv[1]);
 	data->t_die = ft_atoi(argv[2]);
 	data->t_eat = ft_atoi(argv[3]);
@@ -22,43 +68,41 @@ void	init_data(t_data *data, int argc, char **argv)
 		data->nbr_eat = ft_atoi(argv[5]);
 	else
 		data->nbr_eat = -1;
-	pthread_mutex_init(&data->dead_mutex, NULL);
+	data->dead = 0;
+	if (pthread_mutex_init(&data->mutex, NULL))
+	{
+		free(data);
+		return (NULL);
+	}
+	data->forks = alloc_forks(data->nbr);
+	if (!data->forks)
+	{
+		pthread_mutex_destroy(&data->mutex);
+		free(data);
+		return (NULL);
+	}
+	return (data);
 }
 
-t_philo	*init_philo(t_data *data)
+t_philo	*alloc_philo(t_data *data)
 {
 	t_philo	*philo;
 	int		i;
 
-	i = 0;
-	philo = (t_philo *)malloc(sizeof(t_philo) * data->nbr);
+	if (!data)
+		return (NULL);
+	philo = malloc(sizeof(t_philo) * data->nbr);
 	if (!philo)
 		return (NULL);
+	i = 0;
 	while (i < data->nbr)
 	{
 		philo[i].id = i + 1;
-		philo[i].state = SLEEPING;
 		philo[i].nb_eat = 0;
 		philo[i].data = data;
+		philo[i].left = &data->forks[i];
+		philo[i].right = &data->forks[(i + 1) % data->nbr];
 		i++;
 	}
 	return (philo);
-}
-
-t_fork	*init_forks(t_data *data)
-{
-	t_fork	*forks;
-	int		i;
-
-	i = 0;
-	forks = (t_fork *)malloc(sizeof(t_fork) * data->nbr);
-	if (!forks)
-		return (NULL);
-	while (i < data->nbr)
-	{
-		forks[i].id = i + 1;
-		pthread_mutex_init(&forks[i].use, NULL);
-		i++;
-	}
-	return (forks);
 }

@@ -29,7 +29,7 @@ OBJDIR	= obj/
 
 SRCS =\
 	$(SRCDIR)philo.c\
-	$(SRCDIR)helpers.c\
+	$(SRCDIR)utils.c\
 	$(SRCDIR)initializers.c\
 
 HEADERS =\

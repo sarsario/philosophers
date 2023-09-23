@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:53:31 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/23 14:42:14 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/23 16:06:07 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,8 @@ static t_fork	*alloc_forks(int nbr)
 	return (forks);
 }
 
-t_data	*alloc_data(int argc, char **argv)
+static void	set_data(t_data *data, int argc, char **argv)
 {
-	t_data	*data;
-
-	data = malloc(sizeof(t_data));
-	if (!data)
-		return (NULL);
 	data->nbr = ft_atoi(argv[1]);
 	data->t_die = ft_atoi(argv[2]);
 	data->t_eat = ft_atoi(argv[3]);
@@ -69,11 +64,20 @@ t_data	*alloc_data(int argc, char **argv)
 	else
 		data->nbr_eat = -1;
 	data->dead = 0;
-	if (pthread_mutex_init(&data->mutex, NULL))
-	{
-		free(data);
+}
+
+t_data	*alloc_data(int argc, char **argv)
+{
+	t_data	*data;
+
+	data = malloc(sizeof(t_data));
+	if (!data)
 		return (NULL);
-	}
+	set_data(data, argc, argv);
+	if (pthread_mutex_init(&data->mutex, NULL))
+		free(data);
+	if (!data)
+		return (NULL);
 	data->forks = alloc_forks(data->nbr);
 	if (!data->forks)
 	{

@@ -31,6 +31,9 @@ SRCS =\
 	$(SRCDIR)philo.c\
 	$(SRCDIR)utils.c\
 	$(SRCDIR)initializers.c\
+	$(SRCDIR)routine.c\
+	$(SRCDIR)free.c\
+	$(SRCDIR)threads.c\
 
 HEADERS =\
 	$(INCDIR)philosophers.h

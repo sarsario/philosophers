@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:50:38 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/23 14:36:51 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/24 14:38:37 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,10 @@ int	main(int argc, char **argv)
 	philo = alloc_philo(data);
 	if (!data || !philo)
 		return (alloc_error(data, philo));
+	if (!start_threads(philo))
+		return (start_error(philo));
+	if (!join_threads(philo))
+		return (join_error(philo));
+	deep_free(philo);
 	return (0);
 }

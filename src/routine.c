@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:10:21 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/23 16:42:45 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/24 14:03:29 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,33 +27,60 @@ static int	is_dead(t_philo *philo, struct timeval now)
 	return (0);
 }
 
+static void	thinking(t_philo *philo)
+{
+	struct timeval	now;
+
+	gettimeofday(&now, NULL);
+	printf("%ld %d is thinking\n", now.tv_sec * 1000 + now.tv_usec / 1000,
+		philo->id);
+}
+
+static void	sleeping(t_philo *philo)
+{
+	struct timeval	now;
+
+	gettimeofday(&now, NULL);
+	printf("%ld %d is sleeping\n", now.tv_sec * 1000 + now.tv_usec / 1000,
+		philo->id);
+	usleep(philo->data->t_sleep * 1000);
+}
+
+static void	eating(t_philo *philo)
+{
+	struct timeval	now;
+
+	pthread_mutex_lock(&philo->left->mutex);
+	gettimeofday(&now, NULL);
+	printf("%ld %d has taken a fork\n", now.tv_sec * 1000 + now.tv_usec
+		/ 1000, philo->id);
+	thinking(philo);
+	pthread_mutex_lock(&philo->right->mutex);
+	gettimeofday(&now, NULL);
+	printf("%ld %d has taken a fork\n", now.tv_sec * 1000 + now.tv_usec
+		/ 1000, philo->id);
+	printf("%ld %d is eating\n", now.tv_sec * 1000 + now.tv_usec / 1000,
+		philo->id);
+	philo->last_eat = now;
+	usleep(philo->data->t_eat * 1000);
+	philo->nb_eat++;
+	pthread_mutex_unlock(&philo->left->mutex);
+	pthread_mutex_unlock(&philo->right->mutex);
+}
+
 void	*routine(void *arg)
 {
 	t_philo			*philo;
-	struct timeval	now;
 
 	philo = (t_philo *)arg;
 	while (1)
 	{
-		gettimeofday(&now, NULL);
-		if (is_dead(philo, now))
+		if (is_dead(philo, philo->last_eat))
 			return (NULL);
-		pthread_mutex_lock(&philo->left->mutex);
-		printf("%ld %d has taken a fork\n", now.tv_sec * 1000 + now.tv_usec
-			/ 1000, philo->id);
-		printf("%d is thinking\n", philo->id);
-		pthread_mutex_lock(&philo->right->mutex);
-		printf("%ld %d has taken a fork\n", now.tv_sec * 1000 + now.tv_usec
-			/ 1000, philo->id);
-		printf("%d is eating\n", philo->id);
-		gettimeofday(&philo->last_eat, NULL);
-		usleep(philo->data->t_eat * 1000);
-		pthread_mutex_unlock(&philo->left->mutex);
-		pthread_mutex_unlock(&philo->right->mutex);
-		if (philo->nb_eat == philo->data->nbr_eat)
+		thinking(philo);
+		eating(philo);
+		if (philo->data->nbr_eat != -1 && philo->nb_eat == philo->data->nbr_eat)
 			return (NULL);
-		gettimeofday(&now, NULL);
-		printf("%ld %d is sleeping\n", now.tv_sec * 1000 + now.tv_usec / 1000,
-			philo->id);
+		sleeping(philo);
 	}
 }

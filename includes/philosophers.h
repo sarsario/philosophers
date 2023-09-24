@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:45:49 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/23 14:36:44 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/24 14:37:41 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,11 @@ int		valid_args(int argc, char **argv);
 int		alloc_error(t_data *data, t_philo *philo);
 t_data	*alloc_data(int argc, char **argv);
 t_philo	*alloc_philo(t_data *data);
+void	*routine(void *arg);
+int		start_threads(t_philo *philo);
+int		join_threads(t_philo *philo);
+void	deep_free(t_philo *philo);
+int		start_error(t_philo *philo);
+int		join_error(t_philo *philo);
 
 #endif

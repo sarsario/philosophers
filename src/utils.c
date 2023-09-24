@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 09:02:08 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/23 14:24:22 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/24 14:51:06 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	ft_atoi(char *str)
 
 	i = -1;
 	nbr = 0;
-	while (str[i++])
+	while (str[++i])
 		nbr = nbr * 10 + (str[i] - '0');
 	return (nbr);
 }

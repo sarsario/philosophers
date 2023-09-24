@@ -41,7 +41,9 @@
 *.su
 *.idb
 *.pdb
+*.log
 test.c
+launch.json
 
 # Kernel Module Compile Results
 *.mod*

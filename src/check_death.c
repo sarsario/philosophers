@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 15:54:52 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/24 16:21:24 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/24 18:38:33 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	check_death(t_philo *philo)
 		pthread_mutex_unlock(&philo->data->mutex);
 		return (1);
 	}
-	usleep(1);
+	printf("%d cemetery is empty\n", philo->id);
 	pthread_mutex_unlock(&philo->data->mutex);
 	return (0);
 }

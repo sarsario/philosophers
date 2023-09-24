@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:53:31 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/24 16:05:48 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/24 19:50:01 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static t_fork	*alloc_forks(int nbr)
 			free(forks);
 			return (NULL);
 		}
+		forks[i].in_use = 0;
 		i++;
 	}
 	return (forks);

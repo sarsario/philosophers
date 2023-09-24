@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:45:49 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/24 16:05:58 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/24 19:49:18 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 typedef struct s_fork {
 	int				id;
+	int				in_use;
 	pthread_mutex_t	mutex;
 }					t_fork;
 
@@ -45,6 +46,7 @@ typedef struct s_philo {
 }				t_philo;
 
 int		ft_atoi(char *str);
+int		ft_sleep(t_philo *philo, int duration);
 int		ft_perror(char *str);
 int		valid_args(int argc, char **argv);
 int		alloc_error(t_data *data, t_philo *philo);

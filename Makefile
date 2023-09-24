@@ -34,6 +34,7 @@ SRCS =\
 	$(SRCDIR)routine.c\
 	$(SRCDIR)free.c\
 	$(SRCDIR)threads.c\
+	$(SRCDIR)check_death.c\
 
 HEADERS =\
 	$(INCDIR)philosophers.h

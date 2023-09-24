@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 14:07:04 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/24 14:43:05 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/24 16:09:22 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ int	start_threads(t_philo *philo)
 	struct timeval	time;
 
 	i = 0;
-	gettimeofday(&time, NULL);
 	while (i < philo->data->nbr)
 	{
+		gettimeofday(&time, NULL);
 		philo[i].last_eat = time;
 		if (pthread_create(&philo[i].thread, NULL, routine, &philo[i]))
 		{
-			while (i >= 0)
+			while (i > 0)
 			{
-				pthread_detach(philo[i].thread);
 				i--;
+				pthread_detach(philo[i].thread);
 			}
 			return (0);
 		}

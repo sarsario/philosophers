@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:53:31 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/29 22:38:48 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/29 23:18:11 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	alloc_error(t_data *data, t_philo *philo)
 	{
 		if (data->forks)
 			free(data->forks);
-		pthread_mutex_destroy(&data->mutex);
+		pthread_mutex_destroy(&data->death);
+		pthread_mutex_destroy(&data->full);
 		free(data);
 	}
 	if (philo)
@@ -65,6 +66,7 @@ static void	set_data(t_data *data, int argc, char **argv)
 		data->nbr_eat = ft_atoi(argv[5]);
 	else
 		data->nbr_eat = -1;
+	data->nbr_full = 0;
 	data->dead = 0;
 }
 
@@ -76,14 +78,20 @@ t_data	*alloc_data(int argc, char **argv)
 	if (!data)
 		return (NULL);
 	set_data(data, argc, argv);
-	if (pthread_mutex_init(&data->mutex, NULL))
+	if (pthread_mutex_init(&data->death, NULL))
 		free(data);
+	if (pthread_mutex_init(&data->full, NULL))
+	{
+		pthread_mutex_destroy(&data->death);
+		free(data);
+	}
 	if (!data)
 		return (NULL);
 	data->forks = alloc_forks(data->nbr);
 	if (!data->forks)
 	{
-		pthread_mutex_destroy(&data->mutex);
+		pthread_mutex_destroy(&data->death);
+		pthread_mutex_destroy(&data->full);
 		free(data);
 		return (NULL);
 	}

@@ -31,10 +31,11 @@ SRCS =\
 	$(SRCDIR)philo.c\
 	$(SRCDIR)utils.c\
 	$(SRCDIR)initializers.c\
-	$(SRCDIR)routine.c\
 	$(SRCDIR)free.c\
+	$(SRCDIR)m_sleep.c\
 	$(SRCDIR)threads.c\
 	$(SRCDIR)check_death.c\
+	$(SRCDIR)routine.c
 
 HEADERS =\
 	$(INCDIR)philosophers.h

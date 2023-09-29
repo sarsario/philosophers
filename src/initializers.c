@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:53:31 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/24 19:50:01 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/29 22:38:48 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static t_fork	*alloc_forks(int nbr)
 	while (i < nbr)
 	{
 		forks[i].id = i + 1;
+		forks[i].in_use = 0;
 		if (pthread_mutex_init(&forks[i].mutex, NULL))
 		{
 			while (i >= 0)

@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 22:54:52 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/30 11:24:22 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/30 11:27:20 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,11 @@ int	take_forks(t_philo *philo)
 		pthread_mutex_unlock(&philo->right->mutex);
 		return (1);
 	}
-	printf("%i %i has taken a fork\n", now.tv_sec * 1000 + now.tv_usec / 1000,
+	printf("%li %i has taken a fork\n", now.tv_sec * 1000 + now.tv_usec / 1000,
 		philo->id);
 	philo->left->in_use = 1;
 	philo->right->in_use = 1;
-	printf("%i %i has taken a fork\n", now.tv_sec * 1000 + now.tv_usec / 1000,
+	printf("%li %i has taken a fork\n", now.tv_sec * 1000 + now.tv_usec / 1000,
 		philo->id);
 	philo->left->philo_id = philo->id;
 	philo->right->philo_id = philo->id;
@@ -84,7 +84,7 @@ int	eat(t_philo *philo)
 	pthread_mutex_unlock(&philo->left->mutex);
 	pthread_mutex_unlock(&philo->right->mutex);
 	gettimeofday(&now, NULL);
-	printf("%i %i is eating\n", now.tv_sec * 1000 + now.tv_usec / 1000,
+	printf("%li %i is eating\n", now.tv_sec * 1000 + now.tv_usec / 1000,
 		philo->id);
 	philo->last_eat = now;
 	philo->nb_eat++;
@@ -110,7 +110,7 @@ int	sleeping(t_philo *philo)
 	if (dead(philo) || feast_over(philo))
 		return (0);
 	gettimeofday(&now, NULL);
-	printf("%i %i is sleeping\n", now.tv_sec * 1000 + now.tv_usec / 1000,
+	printf("%li %i is sleeping\n", now.tv_sec * 1000 + now.tv_usec / 1000,
 		philo->id);
 	if (!m_sleep(philo, philo->data->t_sleep))
 		return (0);

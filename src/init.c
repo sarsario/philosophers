@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:53:31 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/30 11:51:19 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/30 12:16:31 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,6 @@ t_philo	*alloc_philo(t_data *data)
 	if (!philo)
 		return (NULL);
 	i = 0;
-	if (data->nbr == 1)
-		return (alloc_single_philo(data));
 	while (i < data->nbr)
 	{
 		philo[i].id = i + 1;

@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 22:54:52 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/30 12:11:06 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/30 12:24:28 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@ int	dead(t_philo *philo)
 	struct timeval	now;
 	int				time_diff;
 
-	if (philo->data->nbr > 1 && feast_over(philo))
+	if (feast_over(philo))
 		return (1);
 	gettimeofday(&now, NULL);
 	time_diff = get_time_diff(philo->last_eat, now);
 	pthread_mutex_lock(&philo->data->death);
 	if (time_diff > philo->data->t_die)
 	{
-		printf("%i %i died\n", time_diff, philo->id);
+		printf("%li %i died\n", now.tv_sec * 1000 + now.tv_usec / 1000,
+			philo->id);
 		philo->data->dead = 1;
 		pthread_mutex_unlock(&philo->data->death);
 		return (1);

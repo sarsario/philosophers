@@ -6,27 +6,23 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 15:54:52 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/30 11:50:42 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/30 12:21:52 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
-t_philo	*alloc_single_philo(t_data *data)
+int	died_of_loneliness(t_data *data)
 {
-	t_philo	*philo;
+	struct timeval	now;
 
-	philo = (t_philo *)malloc(sizeof(t_philo));
-	if (!philo)
-		return (NULL);
-	philo->id = 1;
-	philo->data = data;
-	philo->nb_eat = 0;
-	philo->last_eat.tv_sec = 0;
-	philo->last_eat.tv_usec = 0;
-	philo->left = &data->forks[0];
-	philo->right = NULL;
-	return (philo);
+	gettimeofday(&now, NULL);
+	printf("%li 1 has taken a fork\n", now.tv_sec * 1000 + now.tv_usec / 1000);
+	usleep(data->t_die * 1000);
+	gettimeofday(&now, NULL);
+	printf("%li 1 died\n", now.tv_sec * 1000 + now.tv_usec / 1000);
+	free_data(data);
+	return (0);
 }
 
 t_data	*free_data(t_data *data)

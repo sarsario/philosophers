@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:50:38 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/24 19:30:47 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/30 12:20:25 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,12 @@ int	main(int argc, char **argv)
 	if (!valid_args(argc, argv))
 		return (ft_perror("Error: invalid arguments\n"));
 	data = alloc_data(argc, argv);
+	if (!data)
+		return (ft_perror("Error: allocation failed\n"));
+	if (data->nbr == 1)
+		return (died_of_loneliness(data));
 	philo = alloc_philo(data);
-	if (!data || !philo)
+	if (!philo)
 		return (alloc_error(data, philo));
 	if (!start_threads(philo))
 		return (start_error(philo));

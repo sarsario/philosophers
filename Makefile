@@ -95,7 +95,7 @@ norm :
 # This runs the program
 run : $(NAME)
 	@printf "$(CY)>>> Running $(NAME)$(RC)\n"
-	./$(NAME)
+	./$(NAME) 5 800 200 200 7
 
 # This specifies the rules that does not correspond to any filename
 .PHONY: all run clean fclean re

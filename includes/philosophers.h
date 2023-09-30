@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:45:49 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/30 11:30:54 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/30 11:50:39 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int		ft_atoi(char *str);
 int		ft_sleep(t_philo *philo, int duration);
 int		ft_perror(char *str);
 int		valid_args(int argc, char **argv);
+t_data	*free_data(t_data *data);
 int		alloc_error(t_data *data, t_philo *philo);
 t_data	*alloc_data(int argc, char **argv);
 t_philo	*alloc_single_philo(t_data *data);

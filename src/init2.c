@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alloc_philo.c                                      :+:      :+:    :+:   */
+/*   init2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 15:54:52 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/30 11:30:22 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/30 11:50:42 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,11 @@ t_philo	*alloc_single_philo(t_data *data)
 	philo->left = &data->forks[0];
 	philo->right = NULL;
 	return (philo);
+}
+
+t_data	*free_data(t_data *data)
+{
+	free(data->nbr_full);
+	free(data);
+	return (NULL);
 }

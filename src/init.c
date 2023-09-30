@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initializers.c                                     :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:53:31 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/30 09:58:50 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/30 11:51:19 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,21 +86,18 @@ t_data	*alloc_data(int argc, char **argv)
 	if (!data || !set_data(data, argc, argv))
 		return (NULL);
 	if (pthread_mutex_init(&data->death, NULL))
-		free(data);
+		return (free_data(data));
 	if (pthread_mutex_init(&data->full, NULL))
 	{
 		pthread_mutex_destroy(&data->death);
-		free(data);
+		return (free_data(data));
 	}
-	if (!data)
-		return (NULL);
 	data->forks = alloc_forks(data->nbr);
 	if (!data->forks)
 	{
 		pthread_mutex_destroy(&data->death);
 		pthread_mutex_destroy(&data->full);
-		free(data);
-		return (NULL);
+		return (free_data(data));
 	}
 	return (data);
 }

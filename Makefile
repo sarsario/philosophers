@@ -31,10 +31,10 @@ SRCS =\
 	$(SRCDIR)philo.c\
 	$(SRCDIR)utils.c\
 	$(SRCDIR)free.c\
-	$(SRCDIR)initializers.c\
+	$(SRCDIR)init.c\
+	$(SRCDIR)init2.c\
 	$(SRCDIR)m_sleep.c\
 	$(SRCDIR)threads.c\
-	$(SRCDIR)alloc_philo.c\
 	$(SRCDIR)routine.c\
 	$(SRCDIR)routine2.c\
 

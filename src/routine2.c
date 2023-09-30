@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 10:56:36 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/30 11:12:24 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/30 11:28:07 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	think(t_philo *philo)
 	if (dead(philo) || feast_over(philo))
 		return (0);
 	gettimeofday(&now, NULL);
-	printf("%i %i is thinking\n", now.tv_sec * 1000 + now.tv_usec / 1000,
+	printf("%li %i is thinking\n", now.tv_sec * 1000 + now.tv_usec / 1000,
 		philo->id);
 	return (1);
 }

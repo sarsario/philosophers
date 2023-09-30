@@ -34,7 +34,7 @@ SRCS =\
 	$(SRCDIR)initializers.c\
 	$(SRCDIR)m_sleep.c\
 	$(SRCDIR)threads.c\
-	$(SRCDIR)check_death.c\
+	$(SRCDIR)alloc_philo.c\
 	$(SRCDIR)routine.c\
 	$(SRCDIR)routine2.c\
 

@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:45:49 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/30 23:15:22 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/30 23:41:24 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_philo
 {
 	int				id;
 	int				last_eat;
+	int				slept;
 	t_data			*data;
 	t_fork			*left;
 	t_fork			*right;
@@ -65,5 +66,7 @@ t_philo				*init_philos(t_data *data);
 void				*free_philos(t_philo *philos);
 t_fork				*mutex_forks(t_fork *forks, int n);
 t_data				*mutex_data(t_data *data);
+int					get_time(void);
+int					m_sleep(t_philo *philo, int time);
 
 #endif

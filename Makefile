@@ -33,6 +33,7 @@ SRCS =\
 	$(SRCDIR)utils.c\
 	$(SRCDIR)init.c\
 	$(SRCDIR)init2.c\
+	$(SRCDIR)m_sleep.c\
 
 HEADERS =\
 	$(INCDIR)philos.h\

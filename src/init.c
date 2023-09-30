@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 20:32:12 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/30 23:08:41 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/30 23:41:21 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ t_philo	*init_philo(t_data *data, t_fork *forks)
 		philo[i].id = i + 1;
 		philo[i].data = data;
 		philo[i].last_eat = 0;
+		philo[i].slept = 0;
 		philo[i].left = &forks[i];
 		if (i == data->n - 1)
 			philo[i].right = &forks[0];

@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 10:56:36 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/30 11:28:07 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/30 12:39:48 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,24 @@ int	feast_over(t_philo *philo)
 int	think(t_philo *philo)
 {
 	struct timeval	now;
+	int				stop_thinking;
 
 	if (dead(philo) || feast_over(philo))
 		return (0);
 	gettimeofday(&now, NULL);
 	printf("%li %i is thinking\n", now.tv_sec * 1000 + now.tv_usec / 1000,
 		philo->id);
+	stop_thinking = 0;
+	while (!stop_thinking)
+	{
+		pthread_mutex_lock(&philo->left->mutex);
+		pthread_mutex_lock(&philo->right->mutex);
+		if (!philo->left->in_use && !philo->right->in_use)
+			stop_thinking = 1;
+		pthread_mutex_unlock(&philo->left->mutex);
+		pthread_mutex_unlock(&philo->right->mutex);
+		if (!m_sleep(philo, 1))
+			return (0);
+	}
 	return (1);
 }

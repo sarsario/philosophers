@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:45:49 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/30 12:20:20 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/30 12:35:33 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	deep_free(t_philo *philo);
 int		start_error(t_philo *philo);
 int		join_error(t_philo *philo);
 int		dead(t_philo *philo);
+int		take_forks(t_philo *philo);
 int		think(t_philo *philo);
 
 #endif

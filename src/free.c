@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 14:22:23 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/24 14:42:10 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/30 11:15:34 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	deep_free(t_philo *philo)
 				pthread_mutex_destroy(&philo->data->forks[i++].mutex);
 			free(philo->data->forks);
 		}
-		pthread_mutex_destroy(&philo->data->mutex);
+		pthread_mutex_destroy(&philo->data->full);
+		pthread_mutex_destroy(&philo->data->death);
 		free(philo->data);
 	}
 	free(philo);

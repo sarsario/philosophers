@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 14:07:04 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/24 16:09:22 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/30 11:17:57 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,6 @@ void	destroy_mutex(t_philo *philo)
 		pthread_mutex_destroy(&philo->data->forks[i].mutex);
 		i++;
 	}
-	pthread_mutex_destroy(&philo->data->mutex);
+	pthread_mutex_destroy(&philo->data->full);
+	pthread_mutex_destroy(&philo->data->death);
 }

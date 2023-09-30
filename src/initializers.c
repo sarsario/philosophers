@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:53:31 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/29 23:18:11 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/09/30 09:58:50 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,12 @@ static t_fork	*alloc_forks(int nbr)
 	forks = malloc(sizeof(t_fork) * nbr);
 	if (!forks)
 		return (NULL);
-	i = 0;
-	while (i < nbr)
+	i = -1;
+	while (++i < nbr)
 	{
 		forks[i].id = i + 1;
 		forks[i].in_use = 0;
+		forks[i].philo_id = 0;
 		if (pthread_mutex_init(&forks[i].mutex, NULL))
 		{
 			while (i >= 0)
@@ -51,23 +52,30 @@ static t_fork	*alloc_forks(int nbr)
 			return (NULL);
 		}
 		forks[i].in_use = 0;
-		i++;
 	}
 	return (forks);
 }
 
-static void	set_data(t_data *data, int argc, char **argv)
+static int	set_data(t_data *data, int argc, char **argv)
 {
 	data->nbr = ft_atoi(argv[1]);
 	data->t_die = ft_atoi(argv[2]);
 	data->t_eat = ft_atoi(argv[3]);
 	data->t_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
+	{
 		data->nbr_eat = ft_atoi(argv[5]);
+		data->nbr_full = malloc(sizeof(int) * data->nbr);
+		if (!data->nbr_full)
+			return (0);
+	}
 	else
+	{
 		data->nbr_eat = -1;
-	data->nbr_full = 0;
+		data->nbr_full = 0;
+	}
 	data->dead = 0;
+	return (1);
 }
 
 t_data	*alloc_data(int argc, char **argv)
@@ -75,9 +83,8 @@ t_data	*alloc_data(int argc, char **argv)
 	t_data	*data;
 
 	data = malloc(sizeof(t_data));
-	if (!data)
+	if (!data || !set_data(data, argc, argv))
 		return (NULL);
-	set_data(data, argc, argv);
 	if (pthread_mutex_init(&data->death, NULL))
 		free(data);
 	if (pthread_mutex_init(&data->full, NULL))

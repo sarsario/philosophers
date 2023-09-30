@@ -23,23 +23,19 @@ OBJDIR	= obj/
 # CFLAGS	+= -I $(INCDIR) -I $(INCDIR)lib -I $(INCDIR)mlx
 
 # Linking stage flags
-# LDFLAGS = -framework OpenGL -framework AppKit -L$(INCDIR)lib -lft -L$(INCDIR)mlx -lmlx
+# LDFLAGS = -framework OpenGL -framework AppKit -L$(INCDIR)lib\
+	-lft -L$(INCDIR)mlx -lmlx
 
 # List of source files (add your *.c files here)
 
 SRCS =\
 	$(SRCDIR)philo.c\
 	$(SRCDIR)utils.c\
-	$(SRCDIR)free.c\
 	$(SRCDIR)init.c\
 	$(SRCDIR)init2.c\
-	$(SRCDIR)m_sleep.c\
-	$(SRCDIR)threads.c\
-	$(SRCDIR)routine.c\
-	$(SRCDIR)routine2.c\
 
 HEADERS =\
-	$(INCDIR)philosophers.h
+	$(INCDIR)philos.h\
 
 # String manipulation magic
 SRC		:= $(notdir $(SRCS))
@@ -98,4 +94,4 @@ run : $(NAME)
 	./$(NAME) 5 800 200 200 7
 
 # This specifies the rules that does not correspond to any filename
-.PHONY: all run clean fclean re
+.PHONY: all run clean fclean re norm bonus run

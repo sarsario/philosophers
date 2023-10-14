@@ -6,11 +6,11 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:46:04 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/24 23:00:44 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/14 19:51:25 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philosophers.h"
+#include "../includes/philo.h"
 
 int	m_sleep(t_philo *philo, int ms)
 {

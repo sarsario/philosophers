@@ -1,30 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initializers.c                                     :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:53:31 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/29 22:38:48 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/14 19:46:20 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philosophers.h"
-
-int	alloc_error(t_data *data, t_philo *philo)
-{
-	if (data)
-	{
-		if (data->forks)
-			free(data->forks);
-		pthread_mutex_destroy(&data->mutex);
-		free(data);
-	}
-	if (philo)
-		free(philo);
-	return (ft_perror("Error: allocation failed\n"));
-}
+#include "../includes/philo.h"
 
 static t_fork	*alloc_forks(int nbr)
 {
@@ -76,14 +62,18 @@ t_data	*alloc_data(int argc, char **argv)
 	if (!data)
 		return (NULL);
 	set_data(data, argc, argv);
-	if (pthread_mutex_init(&data->mutex, NULL))
-		free(data);
-	if (!data)
-		return (NULL);
+	if (pthread_mutex_init(&data->mutex_dead, NULL))
+		return (free(data), NULL);
+	if (pthread_mutex_init(&data->mutex_write, NULL))
+	{
+		pthread_mutex_destroy(&data->mutex_dead);
+		return (free(data), NULL);
+	}
 	data->forks = alloc_forks(data->nbr);
 	if (!data->forks)
 	{
-		pthread_mutex_destroy(&data->mutex);
+		pthread_mutex_destroy(&data->mutex_dead);
+		pthread_mutex_destroy(&data->mutex_write);
 		free(data);
 		return (NULL);
 	}
@@ -102,11 +92,10 @@ t_philo	*alloc_philo(t_data *data)
 		return (NULL);
 	i = 0;
 	if (data->nbr == 1)
-		return (alloc_single_philo(data));
+		return (alloc_single_philo(data, i + 1));
 	while (i < data->nbr)
 	{
-		philo[i].id = i + 1;
-		philo[i].nb_eat = 0;
+		init_philo(&philo[i], i + 1);
 		philo[i].data = data;
 		philo[i].left = &data->forks[i];
 		philo[i].right = &data->forks[(i + 1) % data->nbr];

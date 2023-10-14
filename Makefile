@@ -30,14 +30,14 @@ OBJDIR	= obj/
 SRCS =\
 	$(SRCDIR)philo.c\
 	$(SRCDIR)utils.c\
-	$(SRCDIR)initializers.c\
+	$(SRCDIR)init.c\
 	$(SRCDIR)routine.c\
 	$(SRCDIR)free.c\
 	$(SRCDIR)threads.c\
 	$(SRCDIR)check_death.c\
 
 HEADERS =\
-	$(INCDIR)philosophers.h
+	$(INCDIR)philo.h
 
 # String manipulation magic
 SRC		:= $(notdir $(SRCS))

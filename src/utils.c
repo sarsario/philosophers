@@ -6,11 +6,11 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 09:02:08 by osarsari          #+#    #+#             */
-/*   Updated: 2023/09/24 14:51:06 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/14 19:51:16 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philosophers.h"
+#include "../includes/philo.h"
 
 static int	is_pos(char *str)
 {

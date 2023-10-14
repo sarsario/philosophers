@@ -6,22 +6,21 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 14:07:04 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/14 13:42:07 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/14 19:47:52 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philosophers.h"
+#include "../includes/philo.h"
 
 int	start_threads(t_philo *philo)
 {
 	int				i;
-	struct timeval	time;
 
 	i = 0;
+	gettimeofday(&philo->data->start, NULL);
 	while (i < philo->data->nbr)
 	{
-		gettimeofday(&time, NULL);
-		philo[i].last_eat = time;
+		philo[i].last_eat = philo->data->start;
 		if (pthread_create(&philo[i].thread, NULL, routine, &philo[i]))
 		{
 			while (i > 0)
@@ -31,32 +30,7 @@ int	start_threads(t_philo *philo)
 			}
 			return (0);
 		}
-		i += 2;
-	}
-	i = 1;
-	gettimeofday(&time, NULL);
-	while (i < philo->data->nbr)
-	{
-		printf("%ld %d is thinking\n", time.tv_sec * 1000
-			+ time.tv_usec / 1000, i + 1);
-		i += 2;
-	}
-	usleep(1000 * philo->data->t_eat);
-	i = 1;
-	while (i < philo->data->nbr)
-	{
-		gettimeofday(&time, NULL);
-		philo[i].last_eat = time;
-		if (pthread_create(&philo[i].thread, NULL, routine, &philo[i]))
-		{
-			while (i > 0)
-			{
-				i--;
-				pthread_detach(philo[i].thread);
-			}
-			return (0);
-		}
-		i += 2;
+		i++;
 	}
 	return (1);
 }

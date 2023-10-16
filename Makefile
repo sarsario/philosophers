@@ -30,9 +30,13 @@ OBJDIR	= obj/
 SRCS =\
 	$(SRCDIR)philo.c\
 	$(SRCDIR)utils.c\
+	$(SRCDIR)utils2.c\
 	$(SRCDIR)free.c\
 	$(SRCDIR)set_data.c\
 	$(SRCDIR)set_philo.c\
+	$(SRCDIR)routine.c\
+	$(SRCDIR)routine2.c\
+	$(SRCDIR)thread.c\
 
 HEADERS =\
 	$(INCDIR)philo.h

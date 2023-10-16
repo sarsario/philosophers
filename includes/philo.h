@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:45:49 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/16 14:18:18 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/16 16:35:39 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef struct s_data {
 	int				nbr_eat;
 	int				*eat_table;
 	int				dead;
-	struct timeval	start;
 	pthread_mutex_t	mutex_dead;
 	pthread_mutex_t	mutex_write;
 	t_fork			*forks;
@@ -43,6 +42,7 @@ typedef struct s_philo {
 	pthread_t		thread;
 	struct timeval	last_eat;
 	struct timeval	now;
+	struct timeval	start;
 	int				thinking;
 	int				nb_eat;
 	t_data			*data;
@@ -57,5 +57,15 @@ void	free_forks(t_fork *forks);
 t_data	*free_data(t_data *data);
 t_data	*set_data(int argc, char **argv);
 t_philo	*set_philo(t_data *data);
+int		time_diff(struct timeval *start, struct timeval *now);
+int		m_sleep(t_philo *philo, int time);
+int		no_food(t_philo *philo);
+int		self_death(t_philo *philo);
+int		grab_forks(t_philo *philo);
+int		have_two_forks(t_philo *philo);
+void	release_forks(t_philo *philo);
+void	*routine(void *arg);
+int		start_thread(t_philo *philo);
+int		join_thread(t_philo *philo);
 
 #endif

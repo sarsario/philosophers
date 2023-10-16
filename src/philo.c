@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:50:38 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/16 14:23:13 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/16 16:37:20 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,19 @@ int	main(int argc, char **argv)
 		free_data(data);
 		return (ft_perror("Error: malloc failed\n"));
 	}
-	// init threads (philo->thread)
-	// join threads
-	// free allocated memory
+	if (!start_thread(philo))
+	{
+		free_data(data);
+		free(philo);
+		return (ft_perror("Error: thread creation failed\n"));
+	}
+	if (!join_thread(philo))
+	{
+		free_data(data);
+		free(philo);
+		return (ft_perror("Error: thread join failed\n"));
+	}
+	free_data(data);
+	free(philo);
 	return (0);
 }

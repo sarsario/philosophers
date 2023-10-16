@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:23:27 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/16 16:41:09 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/16 16:57:50 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ int	no_food(t_philo *philo)
 	int	i;
 	int	j;
 
+	pthread_mutex_lock(&philo->data->mutex_write);
 	i = 0;
 	j = 0;
-	pthread_mutex_lock(&philo->data->mutex_write);
 	while (i < philo->data->nbr)
 	{
 		if (philo->data->eat_table[i] >= philo->data->nbr_eat)

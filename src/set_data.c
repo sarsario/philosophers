@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:29:33 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/16 14:16:03 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/16 16:48:45 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	alloc_forks(t_data *data)
 	{
 		data->forks[i].id = i + 1;
 		data->forks[i].used_by = 0;
-		if (pthread_mutex_init(&data->forks[i].mutex, NULL))
+		if (pthread_mutex_init(&data->forks[i].mutex, NULL) != 0)
 		{
 			while (i > 0)
 				pthread_mutex_destroy(&data->forks[--i].mutex);

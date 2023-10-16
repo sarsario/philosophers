@@ -1,41 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   set_philo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/16 13:55:44 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/16 14:15:54 by osarsari         ###   ########.fr       */
+/*   Created: 2023/10/16 14:16:57 by osarsari          #+#    #+#             */
+/*   Updated: 2023/10/16 14:21:29 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	free_forks(t_fork *forks)
+t_philo	*set_philo(t_data *data)
 {
-	int	i;
+	t_philo	*philo;
+	int		i;
 
-	if (!forks)
-		return ;
 	i = 0;
-	while (forks[i].id != -1)
+	philo = malloc(sizeof(t_philo) * data->nbr);
+	if (!philo)
+		return (NULL);
+	while (i < data->nbr)
 	{
-		pthread_mutex_destroy(&forks[i].mutex);
+		philo[i].id = i + 1;
+		philo[i].data = data;
+		philo[i].thinking = 0;
+		philo[i].nb_eat = 0;
+		philo[i].left = &data->forks[i];
+		if (i == data->nbr - 1)
+			philo[i].right = &data->forks[0];
+		else
+			philo[i].right = &data->forks[i + 1];
 		i++;
 	}
-	free(forks);
-}
-
-t_data	*free_data(t_data *data)
-{
-	if (data && data->eat_table)
-		free(data->eat_table);
-	if (data && data->forks)
-		free_forks(data->forks);
-	pthread_mutex_destroy(&data->mutex_dead);
-	pthread_mutex_destroy(&data->mutex_write);
-	if (data)
-		free(data);
-	return (NULL);
+	return (philo);
 }

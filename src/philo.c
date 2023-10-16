@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:50:38 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/14 19:27:47 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/16 14:23:13 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,17 @@ int	main(int argc, char **argv)
 		return (ft_perror("Error: wrong number of arguments\n"));
 	if (!valid_args(argc, argv))
 		return (ft_perror("Error: invalid arguments\n"));
-	data = alloc_data(argc, argv);
+	data = set_data(argc, argv);
 	if (!data)
-		return (alloc_error(NULL, NULL));
-	philo = alloc_philo(data);
+		return (ft_perror("Error: malloc failed\n"));
+	philo = set_philo(data);
 	if (!philo)
-		return (alloc_error(data, philo));
-	if (!start_threads(philo))
-		return (start_error(philo));
-	if (!join_threads(philo))
-		return (join_error(philo));
-	deep_free(philo);
+	{
+		free_data(data);
+		return (ft_perror("Error: malloc failed\n"));
+	}
+	// init threads (philo->thread)
+	// join threads
+	// free allocated memory
 	return (0);
 }

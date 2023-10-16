@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 09:02:08 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/14 19:51:16 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/16 13:33:52 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	valid_args(int argc, char **argv)
 			return (0);
 	}
 	if (!ft_atoi(argv[1]) || !ft_atoi(argv[2]))
+		return (0);
+	if (argc == 6 && !ft_atoi(argv[5]))
 		return (0);
 	return (1);
 }

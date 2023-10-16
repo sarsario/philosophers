@@ -31,6 +31,7 @@ SRCS =\
 	$(SRCDIR)philo.c\
 	$(SRCDIR)utils.c\
 	$(SRCDIR)init.c\
+	$(SRCDIR)m_sleep.c\
 	$(SRCDIR)routine.c\
 	$(SRCDIR)free.c\
 	$(SRCDIR)threads.c\

@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:45:49 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/14 19:45:08 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/16 12:29:17 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_philo {
 	int				id;
 	pthread_t		thread;
 	struct timeval	last_eat;
+	struct timeval	now;
 	int				eaten;
 	int				slept;
 	int				nb_eat;

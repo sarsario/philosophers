@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 15:54:52 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/14 19:46:13 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/16 13:06:41 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ t_philo	*alloc_single_philo(t_data *data, int id)
 
 int	check_death(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->data->mutex);
+	pthread_mutex_lock(&philo->data->mutex_dead);
 	if (philo->data->dead)
 	{
-		pthread_mutex_unlock(&philo->data->mutex);
+		pthread_mutex_unlock(&philo->data->mutex_dead);
 		return (1);
 	}
-	pthread_mutex_unlock(&philo->data->mutex);
+	pthread_mutex_unlock(&philo->data->mutex_dead);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:45:49 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/17 14:23:25 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/17 15:01:04 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ int		self_death(t_philo *philo);
 int		grab_forks(t_philo *philo);
 int		have_two_forks(t_philo *philo);
 void	release_forks(t_philo *philo);
-void	*routine(void *arg);
+void	*odd_routine(void *arg);
+void	*even_routine(void *arg);
 int		start_thread(t_philo *philo);
 int		join_thread(t_philo *philo);
 

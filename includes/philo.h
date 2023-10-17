@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:45:49 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/16 16:35:39 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/17 12:08:09 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct s_philo {
 	struct timeval	now;
 	struct timeval	start;
 	int				thinking;
+	int				slept;
+	int				ate;
 	int				nb_eat;
 	t_data			*data;
 	t_fork			*left;

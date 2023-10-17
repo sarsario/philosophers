@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 15:02:05 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/16 16:35:25 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:59:34 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	start_thread(t_philo *philo)
 	while (i < philo->data->nbr)
 	{
 		gettimeofday(&philo[i].start, NULL);
+		philo[i].last_eat = philo[i].start;
 		if (pthread_create(&philo[i].thread, NULL, routine, &philo[i]))
 		{
 			while (--i >= 0)

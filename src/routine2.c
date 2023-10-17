@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:23:27 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/16 16:57:50 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/17 12:53:03 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,20 @@ int	grab_forks(t_philo *philo)
 	if (philo->right->used_by)
 	{
 		pthread_mutex_unlock(&philo->right->mutex);
+		pthread_mutex_lock(&philo->left->mutex);
+		philo->left->used_by = 0;
+		pthread_mutex_unlock(&philo->left->mutex);
 		return (0);
 	}
 	philo->right->used_by = philo->id;
 	pthread_mutex_unlock(&philo->right->mutex);
+	gettimeofday(&philo->now, NULL);
+	pthread_mutex_lock(&philo->data->mutex_write);
+	printf("%ld %d has taken a fork\n", philo->now.tv_sec * 1000 + \
+		philo->now.tv_usec / 1000, philo->id);
+	printf("%ld %d has taken a fork\n", philo->now.tv_sec * 1000 + \
+		philo->now.tv_usec / 1000, philo->id);
+	pthread_mutex_unlock(&philo->data->mutex_write);
 	return (1);
 }
 
@@ -87,6 +97,8 @@ int	no_food(t_philo *philo)
 	int	i;
 	int	j;
 
+	if (philo->data->nbr_eat == -1)
+		return (0);
 	pthread_mutex_lock(&philo->data->mutex_write);
 	i = 0;
 	j = 0;

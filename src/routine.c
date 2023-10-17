@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 15:02:44 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/17 12:49:44 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/17 14:16:21 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	eating(t_philo *philo)
 	gettimeofday(&philo->now, NULL);
 	printf("%ld %d is eating\n", philo->now.tv_sec * 1000 + \
 		philo->now.tv_usec / 1000, philo->id);
+	philo->data->last_eat[philo->id - 1] = philo->now;
 	pthread_mutex_unlock(&philo->data->mutex_write);
 	philo->last_eat = philo->now;
 	if (!m_sleep(philo, philo->data->t_eat))
@@ -92,8 +93,17 @@ void	*routine(void *arg)
 	while (1)
 	{
 		if (!no_food(philo) && grab_forks(philo))
+		{
+			gettimeofday(&philo->now, NULL);
+			pthread_mutex_lock(&philo->data->mutex_write);
+			printf("%ld %d has taken a fork\n", philo->now.tv_sec * 1000 + \
+				philo->now.tv_usec / 1000, philo->id);
+			printf("%ld %d has taken a fork\n", philo->now.tv_sec * 1000 + \
+				philo->now.tv_usec / 1000, philo->id);
+			pthread_mutex_unlock(&philo->data->mutex_write);
 			if (!eating(philo))
 				break ;
+		}
 		if (no_food(philo) || !sleeping(philo))
 			break ;
 		if (no_food(philo) || !thinking(philo))

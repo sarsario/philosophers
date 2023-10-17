@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:29:33 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/16 16:48:45 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/17 14:08:28 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	assign(t_data *data, int argc, char **argv)
 	else
 		data->nbr_eat = -1;
 	data->dead = 0;
+	data->last_eat = NULL;
 	data->eat_table = NULL;
 	data->forks = NULL;
 }
@@ -92,6 +93,9 @@ t_data	*set_data(int argc, char **argv)
 	if (!init_data_mutex(data))
 		return (free(data), NULL);
 	assign(data, argc, argv);
+	data->last_eat = malloc(sizeof(struct timeval) * data->nbr);
+	if (!data->last_eat)
+		return (free_data(data));
 	if (!alloc_eat_table(data))
 		return (free_data(data));
 	if (!alloc_forks(data))

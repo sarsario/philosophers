@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:23:27 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/17 12:53:03 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/17 14:23:44 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int	have_two_forks(t_philo *philo)
 
 int	grab_forks(t_philo *philo)
 {
+	if (altruism(philo))
+		return (0);
 	pthread_mutex_lock(&philo->left->mutex);
 	if (philo->left->used_by)
 	{
@@ -72,13 +74,6 @@ int	grab_forks(t_philo *philo)
 	}
 	philo->right->used_by = philo->id;
 	pthread_mutex_unlock(&philo->right->mutex);
-	gettimeofday(&philo->now, NULL);
-	pthread_mutex_lock(&philo->data->mutex_write);
-	printf("%ld %d has taken a fork\n", philo->now.tv_sec * 1000 + \
-		philo->now.tv_usec / 1000, philo->id);
-	printf("%ld %d has taken a fork\n", philo->now.tv_sec * 1000 + \
-		philo->now.tv_usec / 1000, philo->id);
-	pthread_mutex_unlock(&philo->data->mutex_write);
 	return (1);
 }
 

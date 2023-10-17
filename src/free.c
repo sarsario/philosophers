@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:55:44 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/16 14:15:54 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/17 14:09:17 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	free_forks(t_fork *forks)
 
 t_data	*free_data(t_data *data)
 {
+	if (data && data->last_eat)
+		free(data->last_eat);
 	if (data && data->eat_table)
 		free(data->eat_table);
 	if (data && data->forks)

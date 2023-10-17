@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:45:49 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/17 12:08:09 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/17 14:23:25 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_data {
 	int				t_eat;
 	int				t_sleep;
 	int				nbr_eat;
+	struct timeval	*last_eat;
 	int				*eat_table;
 	int				dead;
 	pthread_mutex_t	mutex_dead;
@@ -61,6 +62,7 @@ t_data	*set_data(int argc, char **argv);
 t_philo	*set_philo(t_data *data);
 int		time_diff(struct timeval *start, struct timeval *now);
 int		m_sleep(t_philo *philo, int time);
+int		altruism(t_philo *philo);
 int		no_food(t_philo *philo);
 int		self_death(t_philo *philo);
 int		grab_forks(t_philo *philo);

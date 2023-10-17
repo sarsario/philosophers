@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 09:02:08 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/16 13:33:52 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/17 16:41:10 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,13 @@ static int	is_pos(char *str)
 
 int	valid_args(int argc, char **argv)
 {
-	while (argc > 1)
+	int	i;
+
+	i = argc;
+	while (i > 1)
 	{
-		argc--;
-		if (!is_pos(argv[argc]))
+		i--;
+		if (!is_pos(argv[i]))
 			return (0);
 	}
 	if (!ft_atoi(argv[1]) || !ft_atoi(argv[2]))

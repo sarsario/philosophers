@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:23:27 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/17 14:23:44 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/17 16:44:13 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,11 @@ int	no_food(t_philo *philo)
 			j++;
 		i++;
 	}
+	if (j == philo->data->nbr)
+	{
+		pthread_mutex_unlock(&philo->data->mutex_write);
+		return (1);
+	}
 	pthread_mutex_unlock(&philo->data->mutex_write);
-	return (j == philo->data->nbr);
+	return (0);
 }

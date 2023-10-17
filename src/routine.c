@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 15:02:44 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/17 15:00:54 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:31:13 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,4 +138,3 @@ void	*even_routine(void *arg)
 	}
 	return (NULL);
 }
-

@@ -6,13 +6,13 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:50:38 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/18 15:48:11 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/18 19:43:03 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	start_sim(t_philo *philo, t_data *data)
+static int	run_thread(t_philo *philo, t_data *data)
 {
 	if (!start_thread(philo))
 	{
@@ -51,5 +51,5 @@ int	main(int argc, char **argv)
 	}
 	if (philo->data->nbr == 1)
 		return (single_philo(philo));
-	return (start_sim(philo, data));
+	return (run_thread(philo, data));
 }

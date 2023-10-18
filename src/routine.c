@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 15:02:44 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/17 17:31:13 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/18 11:48:34 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ int	eating(t_philo *philo)
 		return (1);
 	if (!have_two_forks(philo))
 		return (1);
+	if (!try_print(philo, "is eating"))
+	{
+		release_forks(philo);
+		return (0);
+	}
 	pthread_mutex_lock(&philo->data->mutex_write);
 	gettimeofday(&philo->now, NULL);
 	printf("%ld %d is eating\n", philo->now.tv_sec * 1000 + \

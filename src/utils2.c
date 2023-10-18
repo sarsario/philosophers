@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 15:03:46 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/17 17:31:40 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/18 11:41:55 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,21 @@ int	altruism(t_philo *philo)
 		left_neighbor_time.tv_sec * 1000 + left_neighbor_time.tv_usec / 1000)
 		return (1);
 	return (0);
+}
+
+int	try_print(t_philo *philo, char *msg)
+{
+	pthread_mutex_lock(&philo->data->mutex_dead);
+	if (philo->data->dead)
+	{
+		pthread_mutex_unlock(&philo->data->mutex_dead);
+		return (0);
+	}
+	pthread_mutex_lock(&philo->data->mutex_write);
+	gettimeofday(&philo->now, NULL);
+	printf("%ld %d %s\n", philo->now.tv_sec * 1000 + \
+		philo->now.tv_usec / 1000, philo->id, msg);
+	pthread_mutex_unlock(&philo->data->mutex_write);
+	pthread_mutex_unlock(&philo->data->mutex_dead);
+	return (1);
 }

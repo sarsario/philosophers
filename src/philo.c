@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:50:38 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/18 15:08:41 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/18 15:39:35 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	main(int argc, char **argv)
 		free_data(data);
 		return (ft_perror("Error: malloc failed\n"));
 	}
+	if (philo->data->nbr == 1)
+		return (single_philo(philo));
 	if (!start_thread(philo))
 	{
 		free_data(data);
@@ -42,9 +44,6 @@ int	main(int argc, char **argv)
 		free(philo);
 		return (ft_perror("Error: thread join failed\n"));
 	}
-	// gettimeofday(&philo[0].now, NULL);
-	// printf("%ld %d is thinking\n", philo[0].now.tv_sec * 1000 + \
-	// 	philo[0].now.tv_usec / 1000, philo[0].id);
 	free_data(data);
 	free(philo);
 	return (0);

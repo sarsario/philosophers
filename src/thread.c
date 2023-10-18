@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 15:02:05 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/18 14:30:10 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/18 15:37:54 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	start_thread(t_philo *philo)
 {
 	int	i;
 
+	if (philo->data->nbr == 1)
+		return (1);
 	i = 0;
 	while (i < philo->data->nbr)
 	{
@@ -41,6 +43,8 @@ int	join_thread(t_philo *philo)
 {
 	int	i;
 
+	if (philo->data->nbr == 1)
+		return (1);
 	i = 0;
 	while (i < philo->data->nbr)
 	{

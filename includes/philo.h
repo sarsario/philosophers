@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:45:49 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/18 14:47:27 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/18 15:36:53 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,21 @@ typedef struct s_philo {
 	t_fork			*right;
 }					t_philo;
 
-int			ft_atoi(char *str);
-int			ft_perror(char *str);
-int			valid_args(int argc, char **argv);
-void		free_forks(t_fork *forks);
-t_data		*free_data(t_data *data);
-t_data		*free_data_without_destroy(t_data *data);
-t_data		*set_data(int argc, char **argv);
-t_philo		*set_philo(t_data *data);
-long double	time_diff(struct timeval *start, struct timeval *now);
-int			m_sleep(t_philo *philo, int time);
-int			try_print(t_philo *philo, char *msg);
-int			force_death(t_philo *philo);
-void		*routine(void *arg);
-int			start_thread(t_philo *philo);
-int			join_thread(t_philo *philo);
+int		ft_atoi(char *str);
+int		ft_perror(char *str);
+int		valid_args(int argc, char **argv);
+void	free_forks(t_fork *forks);
+t_data	*free_data(t_data *data);
+t_data	*free_data_without_destroy(t_data *data);
+t_data	*set_data(int argc, char **argv);
+t_philo	*set_philo(t_data *data);
+int		time_diff(struct timeval *start, struct timeval *now);
+int		m_sleep(t_philo *philo, int time);
+int		try_print(t_philo *philo, char *msg);
+int		single_philo(t_philo *philo);
+int		force_death(t_philo *philo);
+void	*routine(void *arg);
+int		start_thread(t_philo *philo);
+int		join_thread(t_philo *philo);
 
 #endif

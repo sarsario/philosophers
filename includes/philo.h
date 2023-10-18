@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:45:49 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/18 15:36:53 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/18 15:50:23 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,11 @@ int		m_sleep(t_philo *philo, int time);
 int		try_print(t_philo *philo, char *msg);
 int		single_philo(t_philo *philo);
 int		force_death(t_philo *philo);
+int		self_death(t_philo *philo);
+int		altruism(t_philo *philo);
+int		grab_forks(t_philo *philo);
+void	release_forks(t_philo *philo);
+int		no_food(t_philo *philo);
 void	*routine(void *arg);
 int		start_thread(t_philo *philo);
 int		join_thread(t_philo *philo);

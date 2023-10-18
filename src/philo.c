@@ -6,11 +6,30 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:50:38 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/18 15:39:35 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/18 15:48:11 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+int	start_sim(t_philo *philo, t_data *data)
+{
+	if (!start_thread(philo))
+	{
+		free_data(data);
+		free(philo);
+		return (ft_perror("Error: thread creation failed\n"));
+	}
+	if (!join_thread(philo))
+	{
+		free_data(data);
+		free(philo);
+		return (ft_perror("Error: thread join failed\n"));
+	}
+	free_data(data);
+	free(philo);
+	return (0);
+}
 
 int	main(int argc, char **argv)
 {
@@ -32,19 +51,5 @@ int	main(int argc, char **argv)
 	}
 	if (philo->data->nbr == 1)
 		return (single_philo(philo));
-	if (!start_thread(philo))
-	{
-		free_data(data);
-		free(philo);
-		return (ft_perror("Error: thread creation failed\n"));
-	}
-	if (!join_thread(philo))
-	{
-		free_data(data);
-		free(philo);
-		return (ft_perror("Error: thread join failed\n"));
-	}
-	free_data(data);
-	free(philo);
-	return (0);
+	return (start_sim(philo, data));
 }

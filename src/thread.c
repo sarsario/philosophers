@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 15:02:05 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/17 15:01:09 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/18 14:30:10 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,18 @@ int	start_thread(t_philo *philo)
 	i = 0;
 	while (i < philo->data->nbr)
 	{
-		gettimeofday(&philo[i].start, NULL);
-		philo[i].last_eat = philo[i].start;
+		gettimeofday(&philo[i].last_eat, NULL);
 		pthread_mutex_lock(&philo[i].data->mutex_write);
-		philo[i].data->last_eat[i] = philo[i].start;
+		philo[i].data->last_eat[i] = philo[i].last_eat;
 		pthread_mutex_unlock(&philo[i].data->mutex_write);
-		if (i % 2)
+		if (i % 2 == 0)
+			philo[i].ate = 1;
+		if (pthread_create(&philo[i].thread, NULL, &routine, &philo[i]))
 		{
-			if (pthread_create(&philo[i].thread, NULL, odd_routine, &philo[i]))
-			{
-				while (--i >= 0)
-					pthread_detach(philo[i].thread);
-				return (0);
-			}
-		}
-		else
-		{
-			if (pthread_create(&philo[i].thread, NULL, even_routine, &philo[i]))
-			{
-				while (--i >= 0)
-					pthread_detach(philo[i].thread);
-				return (0);
-			}
+			force_death(&philo[i]);
+			while (i-- > 0)
+				pthread_join(philo[i].thread, NULL);
+			return (0);
 		}
 		i++;
 	}
@@ -56,9 +46,8 @@ int	join_thread(t_philo *philo)
 	{
 		if (pthread_join(philo[i].thread, NULL))
 		{
-			while (i < philo->data->nbr)
-				pthread_detach(philo[i++].thread);
-			return (0);
+			force_death(&philo[i]);
+			pthread_detach(philo[i].thread);
 		}
 		i++;
 	}

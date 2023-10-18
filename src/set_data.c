@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:29:33 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/17 14:08:28 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:00:29 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,6 @@ t_data	*set_data(int argc, char **argv)
 	if (!alloc_eat_table(data))
 		return (free_data(data));
 	if (!alloc_forks(data))
-		return (free_data(data));
+		return (free_data_without_destroy(data));
 	return (data);
 }

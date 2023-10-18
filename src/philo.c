@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 08:50:38 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/16 16:37:20 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/18 15:08:41 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ int	main(int argc, char **argv)
 		free(philo);
 		return (ft_perror("Error: thread join failed\n"));
 	}
+	// gettimeofday(&philo[0].now, NULL);
+	// printf("%ld %d is thinking\n", philo[0].now.tv_sec * 1000 + \
+	// 	philo[0].now.tv_usec / 1000, philo[0].id);
 	free_data(data);
 	free(philo);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 15:03:46 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/18 15:38:22 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/21 12:50:08 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,8 @@ int	m_sleep(t_philo *philo, int time)
 	philo->now = philo->start;
 	while (time_diff(&philo->start, &philo->now) < time)
 	{
-		pthread_mutex_lock(&philo->data->mutex_dead);
-		if (philo->data->dead)
-		{
-			pthread_mutex_unlock(&philo->data->mutex_dead);
+		if (self_death(philo))
 			return (0);
-		}
-		pthread_mutex_unlock(&philo->data->mutex_dead);
 		usleep(100);
 		gettimeofday(&philo->now, NULL);
 	}

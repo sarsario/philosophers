@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:23:27 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/18 15:51:18 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/21 13:30:03 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@ int	self_death(t_philo *philo)
 		pthread_mutex_unlock(&philo->data->mutex_dead);
 		return (1);
 	}
+	pthread_mutex_lock(&philo->data->mutex_dead);
+	if (philo->data->dead)
+	{
+		pthread_mutex_unlock(&philo->data->mutex_dead);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->data->mutex_dead);
 	return (0);
 }
 

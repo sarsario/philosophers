@@ -6,7 +6,7 @@
 /*   By: osarsari <osarsari@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 15:03:46 by osarsari          #+#    #+#             */
-/*   Updated: 2023/10/21 12:50:08 by osarsari         ###   ########.fr       */
+/*   Updated: 2023/10/21 13:31:38 by osarsari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,10 @@ int	force_death(t_philo *philo)
 int	single_philo(t_philo *philo)
 {
 	gettimeofday(&philo->now, NULL);
+	philo->last_eat = philo->now;
 	printf("%ld %d is thinking\n", philo->now.tv_sec * 1000 + \
 		philo->now.tv_usec / 1000, philo->id);
-	m_sleep(philo, philo->data->t_die);
-	printf("%ld %d died\n", philo->now.tv_sec * 1000 + \
-		philo->now.tv_usec / 1000, philo->id);
+	m_sleep(philo, philo->data->t_die + 2);
 	free_data(philo->data);
 	free(philo);
 	return (0);
